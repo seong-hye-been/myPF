@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>스프라이츠 애니메이션</title>
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+    <style>
+        html,
+        body,
+        ul,
+        h1 {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #8CC63E;
+        }
+
+        ul {
+            list-style: none;
+        }
+        
+        /*IR숨기기*/
+        .ir{
+            display: block;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
+
+        /*
+            웹폰트체
+            font-family: 'Gloria Hallelujah', cursive;
+            font-family: 'ZCOOL KuaiLe', cursive;
+        */
+
+        /*타이틀*/
+        .mtit {
+            position: absolute;
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            /*가로중앙이동*/
+            font-family: 'Gloria Hallelujah', cursive;
+            font-size: 52px;
+            color: #fff;
+            z-index: 1;
+        }
+
+        /*메뉴*/
+        .gnb {
+            position: absolute;
+            top: 10%;
+            left: 50px;
+            z-index: 1;
+        }
+
+        .gnb a {
+            color: #fff;
+            text-decoration: none;
+            font-family: 'ZCOOL KuaiLe', cursive;
+            font-size: 32px;
+            line-height: 100px;
+        }
+
+        /*메뉴오버시*/
+        .gnb a:hover {
+            color: #f00;
+            text-decoration: line-through;
+        }
+
+        /*TV박스*/
+        .tvset {
+            position: relative;
+            /*부모자격*/
+            width: 1280px;
+            height: 720px;
+            background: url(images/tvset.png) no-repeat;
+            margin: 0 auto;
+        }
+
+        /*스크린*/
+        .screen {
+            position: absolute;
+            top: 213px;
+            left: 449px;
+            width: 456px;
+            height: 227px;
+            background-image: url(images/street.jpg);
+            background-repeat: repeat-x;
+            background-size: auto 100%;
+            /*세로는 다보이고 가로는 자동!*/
+            /*애니메이션(이시이지반방마)*/
+            animation: street 5s linear infinite;
+        }
+        /*키프레임 - 스크린 배경 애니메이션*/
+        @keyframes street{
+            from{
+                background-position: 0 0;
+            }
+            to{
+                background-position: -560% 0;
+            }
+            /*위치이동시 %단위는 배경이미지 크기를 기준하여 잡는다. 예컨데 100%는 배경이미지 크기와 같다*/
+        }/*키프레임*/
+        
+        /*걷는소년*/
+        .spani1{
+            width: 92px;
+            height: 176px;
+            margin: 23px auto;
+            background-image: url(images/spAni03.png);
+            background-size: auto 176px;
+            /*outline: 2px solid blue;*/
+            /*애니메이션*/
+            animation: spani1 1s steps(8) infinite;
+        }
+        /*걷는소년 키프레임*/
+        @keyframes spani1{
+            from{
+                background-position-x: 0;
+            }
+            to{
+                background-position-x: -797px;
+            }
+        }/*키프레임*/
+        
+       /* 스프라이트를 이용한 애니메이션 하기
+        
+        - 원리: 배경이미지를 이동하여 장면을 전환함
+        - 중요정보: 전체 길이를 알아야함
+        
+        전체길이 / 장면개수 = 하나당 이동길이
+        비례식으로 계산함
+        
+        가로 : 세로 = 1472 : 325 = x : 176
+        x = 1472 * 176 / 325
+        x = 797.14....
+        
+        [ 호출시 스프라이트 애니 장면별 찍는 steps를 정함! ]
+        - 장면을 찍을때 이징(가속도)은 불필요!
+        
+        animation : 이름 시간 steps(장면수) infinite;
+        
+        [ 키프레임 셋팅법 ]
+        @keyframes 키프레임명 {
+            from{
+                background-position: 0 0;
+            }
+            to{
+                background-position: 가로크기 0;
+            }
+        }
+        
+        x축 이동일 경우 x축 포지션만 변경하고
+        y축 이도일 경우 y축 포지션 값만 변경한다!
+        
+        포지션은 별도의 속성인
+        background-position-x
+        background-position-y
+        를 사용할 수 있다
+        */
+        
+        /*마법사*/
+        .spani2{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 72px;
+            background-image: url(images/spAni01.png);
+            /*outline: 2px solid blue;*/
+            /*애니메이션*/
+            animation: spani2 1s steps(10) infinite;
+        }
+
+        /*마법사 키프레임*/
+        @keyframes spani2{
+            from{
+                background-position-x: 0;
+            }
+            to{
+                background-position-x: -500px;
+                /*가로크기와 같은 값을 쓴다(부호만 마이너스)*/
+            }
+        }/*키프레임*/
+        
+        /*쿠키몬*/
+        .spani3{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 118.33px;
+            height: 118.33px;
+            background-image: url(images/spAni02.png);
+            /*outline: 2px solid blue;*/
+            /*애니메이션*/
+             animation: spani3X 1s steps(6) infinite,
+                        spani3Y 3s steps(3) infinite;
+            
+            /*X,Y축 진행을 반대로 바꿔본 설정
+            animation: spani3Y 1s steps(3) infinite,
+                        spani3X 3s steps(6) infinite;
+            */
+        }
+        
+        /*
+            x축 키프레임과 y축 키프레임을 만들고 호출한다
+            x축은 1초간 6장면 steps(장면수) -> steps(6)
+            y축은 3초간 3라인 steps(라인수) -> steps(3)
+        */
+        
+        /*쿠키몬 키프레임*/
+        @keyframes spani3X{
+            from{
+                background-position-x: 0;
+            }
+            to{
+                background-position-x: -710px;
+                /*x축이동은 이미지 가로길이(width)값*/
+            }
+        }/*키프레임*/
+        
+        @keyframes spani3Y{
+            from{
+                background-position-y: 0;
+            }
+            to{
+                background-position-y: -355px;
+                /*y축이동은 이미지 세로길이(hieght)값*/
+            }
+        }/*키프레임*/
+        
+        .spani4{
+            position: absolute;
+            top: 10%;
+            right: 20px;
+            width: 256px;
+            height: 407px;
+            background-image: url(images/girl_frames.png);
+            /*outline: 2px solid blue;*/
+            border:20px ridge #a85f15;
+            transform: scale(.5);
+            /*애니메이션*/
+            animation: spani4X 1s steps(5) infinite,
+                        spani4Y 3s steps(3) infinite;
+            
+        }
+        
+        /*쿠키몬 키프레임*/
+        @keyframes spani4X{
+            from{
+                background-position-x: 0;
+            }
+            to{
+                background-position-x: -1280px;
+                /*x축이동은 이미지 가로길이(width)값*/
+            }
+        }/*키프레임*/
+        
+        @keyframes spani4Y{
+            from{
+                background-position-y: 0;
+            }
+            to{
+                background-position-y: -1222px;
+                /*y축이동은 이미지 세로길이(hieght)값*/
+            }
+        }/*키프레임*/
+        
+        /*확대 애니메이션*/
+        .ani{
+            transition: all .8s;
+            
+        }
+        
+        .ani:hover{
+            transform: scale(4);
+        }
+        
+    </style>
+</head>
+
+<body>
+    <!--1.제목-->
+    <h1 class="mtit">John's Television</h1>
+
+    <!--2.메뉴-->
+    <nav class="gnb">
+        <ul>
+            <li><a href="#">Watching</a></li>
+            <li><a href="#">Eating</a></li>
+            <li><a href="#">Listening</a></li>
+            <li><a href="#">Sleeping</a></li>
+        </ul>
+    </nav>
+
+    <!--3.TV박스-->
+    <section class="tvset">
+        <!--스크린박스-->
+        <div class="screen">
+            <!--1.걷는소년-->
+            <div class="ani spani1">
+                <span class="ir">걷는소년</span>
+            </div>
+            <!--2.마법사-->
+            <div class="ani spani2">
+                <span class="ir">마법사</span>
+            </div>
+            <!--3.쿠키몬-->
+            <div class="ani spani3">
+                <span class="ir">쿠키몬</span>
+            </div>
+        </div>
+    </section>
+    
+    <div class="ani spani4">
+        <span class="ir">웃는여자</span>
+    </div>
+
+
+
+
+
+
+
+
+</body></html>

@@ -1,0 +1,7 @@
+<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+
+  /*
+        웹폰트체
+        font-family: 'Gloria Hallelujah', cursive;
+        font-family: 'ZCOOL KuaiLe', cursive;
+        */
